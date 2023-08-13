@@ -7,7 +7,7 @@ from is_vertically_aligned import is_vertically_aligned
 from correct_ocr_results import correct_ocr_results
 
 # Initialize the reader once
-reader = easyocr.Reader(['en'])
+reader = easyocr.Reader(['en'], gpu=True)
 
 def extract_data_from_image(image, region_choice):
     # image = cv2.imread(image_path)
