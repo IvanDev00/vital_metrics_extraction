@@ -1,0 +1,39 @@
+# Version control directories
+.git/
+.gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+*.venv
+.env
+
+# IDE directories
+.idea/
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+*.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Other files and directories that might be present in your project but are not needed in the Docker image
+*.bak
+*.swp
+*.swo

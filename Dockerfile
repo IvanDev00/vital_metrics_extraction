@@ -1,18 +1,18 @@
 # Use an official Python runtime as a base image
-FROM python:3.12.0rc1-slim as builder
+FROM python:3.11.2-slim as builder
 
-# Set the working directory in the container to /app
+## Set the working directory in the container to /app
 WORKDIR /app
 
 # Copy only the requirements.txt first to leverage Docker cache
 COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt
+# Install any needed packages specified in requirements.txt and compile them to wheels
 RUN python -m pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
 
-# Start a new stage
-FROM python:3.8-slim
+# Final stage
+FROM python:3.11.2-slim
 
 # Create a non-root user
 RUN useradd -m myuser
@@ -21,8 +21,14 @@ USER myuser
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Copy from the builder stage
-COPY --from=builder /app /app
+# Copy the compiled wheels from the builder stage
+COPY --from=builder /app/wheels /wheels
+COPY --from=builder /app/requirements.txt .
+
+# Install the Python packages from the wheels
+RUN pip install --no-cache-dir /wheels/*
+
+# Copy the rest of the application
 COPY . .
 
 # Make port 5000 available to the world outside this container
