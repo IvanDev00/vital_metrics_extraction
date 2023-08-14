@@ -52,3 +52,9 @@ bmi_regions = [
   { "x": 201, "y": 4548, "width": 478, "height": 128, "unit": "px" },
   { "x": 731, "y": 4534, "width": 478, "height": 239, "unit": "px" },
 ]
+
+ring_regions = [
+  {"x": 1407, "y": 274, "width": 78, "height": 47, "unit": 'px' },
+  {"x": 1407, "y": 332, "width": 78, "height": 47, "unit": 'px'},
+  {"x": 1504, "y": 397, "width": 78, "height": 47, "unit": 'px'},
+]

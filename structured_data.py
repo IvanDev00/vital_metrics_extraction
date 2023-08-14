@@ -137,3 +137,10 @@ def bmi_data(result):
         },
     ]
     return average_weight, status, medical_record
+
+def ring_data(result):
+    return {
+        "oxygen_level": result[0],
+        "pulse_rate": result[1],
+        "o2_score": result[2],
+    }
