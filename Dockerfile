@@ -9,7 +9,7 @@ COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt and compile them to wheels
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-dev ffmpeg libsm6 libxext6 \
+    libgl1-mesa-dev ffmpeg libsm6 libxext6 poppler-utils \ 
     && python -m pip install --upgrade pip \
     && pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
 
@@ -23,7 +23,7 @@ ENV FLASK_ENV=production
 
 # Update and install necessary packages
 RUN apt-get update && \
-    apt-get install -y libgl1-mesa-dev ffmpeg libsm6 libxext6 && \
+    apt-get install -y libgl1-mesa-dev ffmpeg libsm6 libxext6 poppler-utils && \  
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -51,6 +51,7 @@ EXPOSE 5000
 
 # Use gunicorn for production in shell form
 CMD gunicorn app:app --bind 0.0.0.0:5000 --workers 4
+
 
 
 
