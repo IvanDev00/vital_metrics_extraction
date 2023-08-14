@@ -6,7 +6,7 @@ import cv2
 from pdf_to_image import pdf_to_image
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/v1/*": {"origins": ["http://localhost:3000"]}})
 
 @app.route('/v1/extract-metrics', methods=['POST'])
 def extract():
