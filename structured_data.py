@@ -1,4 +1,37 @@
 from get_sleep_hours import get_sleep_hours
+import re
+
+def get_numeric_value(value, pattern):
+    return re.sub(pattern, '', value).strip()
+
+def get_sleep_minutes(input_str):
+    start_time, end_time = input_str.split("-")
+
+    def convert_to_24_hour(time):
+        hours, minutes = map(int, time[:-2].split(":"))
+        period = time[-2:].lower()
+
+        if period == "pm" and hours != 12:
+            hours += 12
+        elif period == "am" and hours == 12:
+            hours = 0
+
+        return hours, minutes
+
+    start = convert_to_24_hour(start_time)
+    end = convert_to_24_hour(end_time)
+
+    hours_diff = end[0] - start[0]
+    minutes_diff = end[1] - start[1]
+
+    if minutes_diff < 0:
+        minutes_diff += 60
+        hours_diff -= 1
+
+    if hours_diff < 0:
+        hours_diff += 24
+
+    return hours_diff * 60 + minutes_diff
 
 def dashboard_data(result):
     total_dailySteps = result[0]
@@ -9,48 +42,56 @@ def dashboard_data(result):
             "diagnosis_label": result[2],
             "diagnosis_value": result[3],
             "diagnosis_keyValue": "steps",
+            "diagnosis_numeric_value": get_numeric_value(result[3], 'Steps'),
         },
         {
             "diagnosis": "Sleep",
             "diagnosis_label": get_sleep_hours(result[4]),
             "diagnosis_value": result[4],
             "diagnosis_keyValue": "hours",
+            "diagnosis_numeric_value": str(get_sleep_minutes(result[4])),
         },
         {
             "diagnosis": "Heart Rate",
             "diagnosis_label": result[5],
             "diagnosis_value": result[6],
-            "diagnosis_keyValue": "bp",
+            "diagnosis_keyValue": "bpm",
+            "diagnosis_numeric_value": get_numeric_value(result[6], 'bpm'),
         },
         {
             "diagnosis": "Blood Pressure",
             "diagnosis_label": result[7],
             "diagnosis_value": result[8],
             "diagnosis_keyValue": "mmHg",
+            "diagnosis_numeric_value": get_numeric_value(result[8], 'mmHg'),
         },
         {
             "diagnosis": "Blood Oxygen",
             "diagnosis_label": result[9],
             "diagnosis_value": result[10],
             "diagnosis_keyValue": "percentage",
+            "diagnosis_numeric_value": get_numeric_value(result[10], '%'),
         },
         {
             "diagnosis": "HRV",
             "diagnosis_label": result[11],
             "diagnosis_value": result[12],
             "diagnosis_keyValue": "",
+            "diagnosis_keyValue": result[12],
         },
         {
             "diagnosis": "Body Temperature",
             "diagnosis_label": result[13],
             "diagnosis_value": result[14],
             "diagnosis_keyValue": "celcius",
+            "diagnosis_numeric_value": get_numeric_value(result[14], '°C'),
         },
         {
             "diagnosis": "Blood Glucose",
             "diagnosis_label": result[15],
             "diagnosis_value": result[16],
             "diagnosis_keyValue": "mg/dL",
+            "diagnosis_numeric_value": get_numeric_value(result[16], 'mg/dL|mmol/L'),
         }
     ]
 
