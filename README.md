@@ -50,3 +50,7 @@ Before you begin, ensure you have the following:
 2. Install the Python extension
 3. Open the project folder in VS Code
 4. Select the virtual environment by clicking on the Python version in the bottom left corner of the VS Code window
+
+### TO run in ec2 even closed
+pip install gunicorn
+gunicorn -b 0.0.0.0:5000 app:app
