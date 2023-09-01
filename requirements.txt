@@ -7,7 +7,7 @@ easyocr
 filelock
 Flask
 Flask-Cors
-idnamageio1
+idnamageio1==2.31.1
 itsdangerous
 Jinja
 lazy_loaderarkupSafe
