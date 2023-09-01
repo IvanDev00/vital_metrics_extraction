@@ -32,7 +32,7 @@ shapely==2.0.1
 six==1.16.0
 sympy==1.10.1
 tifffile==2021.3.17
-torch==2.0.1
+torch==1.13.1
 torchvision==0.15.2
 typing_extensions==4.7.1
 urllib3==2.0.4
