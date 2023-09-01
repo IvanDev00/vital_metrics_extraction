@@ -5,7 +5,7 @@ click==8.1.6
 colorama==0.4.6
 easyocr==1.7.0
 filelock==3.12.2
-Flask==2.3.2
+Flask==2.2.5
 Flask-Cors==4.0.0
 idna==3.4
 imageio==2.31.1
