@@ -6,6 +6,7 @@ def correct_ocr_results(text):
         text = re.sub(r'Latest (\d+).(\d+)([ap]m)', r'Latest \1:\2\3', text)
         text = re.sub(r'I1', '11', text)  # Correct common OCR mistake for 11
         text = re.sub(r'IO', '10', text)  # Correct common OCR mistake for 10
+        text = re.sub(r'I5', '15', text)  # Correct common OCR mistake for 10
         text = re.sub(r'4O', '40', text)  # Correct common OCR mistake for 40
         text = re.sub(r'O', '0', text)    # Correct common OCR mistake for 0
 

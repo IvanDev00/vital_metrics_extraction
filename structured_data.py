@@ -39,63 +39,101 @@ def dashboard_data(result):
     medical_report = [
         {
             "diagnosis": "Pedometer",
-            "diagnosis_label": result[2],
-            "diagnosis_value": result[3],
+            "diagnosis_label": result[3],
+            "diagnosis_value": result[4],
             "diagnosis_keyValue": "steps",
-            "diagnosis_numeric_value": get_numeric_value(result[3], 'Steps'),
+            "diagnosis_numeric_value": get_numeric_value(result[4], 'Steps'),
         },
         {
             "diagnosis": "Sleep",
-            "diagnosis_label": get_sleep_hours(result[4]),
-            "diagnosis_value": result[4],
+            "diagnosis_label": get_sleep_hours(result[6]),
+            "diagnosis_value": result[6],
             "diagnosis_keyValue": "hours",
-            "diagnosis_numeric_value": str(get_sleep_minutes(result[4])),
+            "diagnosis_numeric_value": str(get_sleep_minutes(result[6])),
         },
         {
             "diagnosis": "Heart Rate",
-            "diagnosis_label": result[5],
-            "diagnosis_value": result[6],
+            "diagnosis_label": result[8],
+            "diagnosis_value": result[9],
             "diagnosis_keyValue": "bpm",
-            "diagnosis_numeric_value": get_numeric_value(result[6], 'bpm'),
+            "diagnosis_numeric_value": get_numeric_value(result[9], 'bpm'),
         },
         {
             "diagnosis": "Blood Pressure",
-            "diagnosis_label": result[7],
-            "diagnosis_value": result[8],
+            "diagnosis_label": result[11],
+            "diagnosis_value": result[12],
             "diagnosis_keyValue": "mmHg",
-            "diagnosis_numeric_value": get_numeric_value(result[8], 'mmHg'),
+            "diagnosis_numeric_value": get_numeric_value(result[12], 'mmHg'),
         },
         {
             "diagnosis": "Blood Oxygen",
-            "diagnosis_label": result[9],
-            "diagnosis_value": result[10],
+            "diagnosis_label": result[14],
+            "diagnosis_value": result[15],
             "diagnosis_keyValue": "percentage",
-            "diagnosis_numeric_value": get_numeric_value(result[10], '%'),
+            "diagnosis_numeric_value": get_numeric_value(result[15], '%'),
         },
         {
             "diagnosis": "HRV",
-            "diagnosis_label": result[11],
-            "diagnosis_value": result[12],
+            "diagnosis_label": result[17],
+            "diagnosis_value": result[18],
             "diagnosis_keyValue": "",
-            "diagnosis_keyValue": result[12],
+            "diagnosis_keyValue": result[18],
         },
         {
             "diagnosis": "Body Temperature",
-            "diagnosis_label": result[13],
-            "diagnosis_value": result[14],
+            "diagnosis_label": result[20],
+            "diagnosis_value": result[21],
             "diagnosis_keyValue": "celcius",
-            "diagnosis_numeric_value": get_numeric_value(result[14], '°C'),
+            "diagnosis_numeric_value": get_numeric_value(result[21], '°C'),
         },
         {
             "diagnosis": "Blood Glucose",
-            "diagnosis_label": result[15],
-            "diagnosis_value": result[16],
+            "diagnosis_label": result[23],
+            "diagnosis_value": result[24],
             "diagnosis_keyValue": "mg/dL",
-            "diagnosis_numeric_value": get_numeric_value(result[16], 'mg/dL|mmol/L'),
+            "diagnosis_numeric_value": get_numeric_value(result[24], 'mg/dL|mmol/L'),
         }
     ]
 
     return total_dailySteps, total_dalySleep, medical_report
+
+def watch_data(raw_data):
+    data = format_watch_region_label(raw_data)
+    diagnosis_keys = ['Pedometer', 'Sleep', 'Heart Rate', 'Blood pressure', 'Blood oxygen', 'HRV', 'ECG', 'Body temperature', 'Blood Glucose']
+    key_values = ['Steps', 'hours', 'bpm', 'mmHg', '%', '', '', '°C', 'mg/dL', 'mmol/L']
+    
+    total_dailySteps = data[0]
+    total_dailySleep = data[1]
+    medical_report = []
+    
+    for i in range(2, len(data)):
+        if data[i] in diagnosis_keys:
+            index = diagnosis_keys.index(data[i])
+            diagnosis_value = data[i+2]
+            sleep_value = data[i+1]
+            diagnosis = {
+                "diagnosis": data[i],
+                "diagnosis_label": data[i+1],
+                "diagnosis_keyValue": key_values[index],
+            }
+
+            if diagnosis["diagnosis"] == 'Sleep':
+               diagnosis["diagnosis_label"] = get_sleep_hours(data[i+1])
+               diagnosis["diagnosis_value"]= sleep_value
+               diagnosis["diagnosis_numeric_value"] = str(get_sleep_minutes(sleep_value))
+            else:
+                key_pattern = key_values[index]
+
+                if diagnosis_value in diagnosis_keys:
+                    diagnosis["diagnosis_numeric_value"] = ""
+                    diagnosis["diagnosis_value"]= ""
+                else:
+                    diagnosis["diagnosis_numeric_value"] = get_numeric_value(diagnosis_value, key_pattern)
+                    diagnosis["diagnosis_value"]= diagnosis_value
+
+            medical_report.append(diagnosis)
+            
+    return total_dailySteps, total_dailySleep, medical_report
 
 def bmi_data(result):
     average_weight = result[0]
@@ -185,3 +223,13 @@ def ring_data(result):
         "pulse_rate": result[1],
         "o2_score": result[2],
     }
+
+
+def format_watch_region_label(lst):
+      # Find the index of 'Body'
+    body_index = lst.index('Body')
+    # Combine 'Body' and 'temperature' into 'Body temperature'
+    lst[body_index] = lst[body_index] + ' ' + lst[body_index + 1]
+    # Remove 'temperature' from the list
+    del lst[body_index + 1]
+    return lst

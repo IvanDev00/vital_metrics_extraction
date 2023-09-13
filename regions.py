@@ -18,6 +18,29 @@ dashboard_regions = [
   { "x": 686, "y": 6004, "width": 381, "height": 85, "unit": "px" },
 ]
 
+watch_regions = [
+  { "x": 327, "y": 528, "width": 444, "height": 146, "unit": "px"},
+  { "x": 415, "y": 768, "width": 299, "height": 147, "unit": "px"},
+  { "x": 174, "y": 1497, "width": 454, "height": 142, "unit": "px"},
+  {"x": 656, "y": 1474, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 173, "y": 2054, "width": 454, "height": 142, "unit": "px"},
+  {"x": 651, "y": 2028, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 172, "y": 2603, "width": 454, "height": 142, "unit": "px"},
+  {"x": 652, "y": 2584, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 172, "y": 3155, "width": 454, "height": 142, "unit": "px"},
+  {"x": 655, "y": 3142, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 173, "y": 3716, "width": 454, "height": 142, "unit": "px"},
+  {"x": 651, "y": 3695, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 174, "y": 4276, "width": 454, "height": 142, "unit": "px"},
+  {"x": 653, "y": 4249, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 174, "y": 4824, "width": 454, "height": 142, "unit": "px"},
+  {"x": 654, "y": 4811, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 171, "y": 5382, "width": 454, "height": 142, "unit": "px"},
+  {"x": 656, "y": 5359, "width": 444, "height": 180, "unit": 'px'},
+  { "x": 170, "y": 5937, "width": 454, "height": 142, "unit": "px"},
+  {"x": 655, "y": 5920, "width": 444, "height": 180, "unit": 'px'},
+]
+
 bmi_regions = [
   { "x": 113, "y": 252, "width": 1061, "height": 315, "unit": "px" },
   { "x": 100, "y": 589, "width": 1061, "height": 209, "unit": "px" },
