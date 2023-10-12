@@ -4,6 +4,9 @@ from flask_cors import CORS
 import numpy as np
 import cv2
 from pdf_to_image import pdf_to_image
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 CORS(app, resources={r"/v1/*": {"origins": ["*"]}})
@@ -42,7 +45,8 @@ def extract():
         }), 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        logging.error(f"An error occurred: {e}")
+        return jsonify({'error': 'An error occurred'}), 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
