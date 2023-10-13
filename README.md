@@ -19,13 +19,13 @@ Before you begin, ensure you have the following:
 
 1. Open Terminal
 2. Run `python -m venv venv`
-3. Run `source venv/bin/activate`
+3. Run `source venv/Scripts/activate`
 
 ## Setup
 
 1. Activate virtual environment
 
-- Run `source venv/bin/activate` on MacOS and Linux
+- Run `source venv/Scripts/activate` on MacOS and Linux
 - Run `venv\Scripts\activate` on Windows
 
 2. Install dependencies in virtual environment
@@ -52,5 +52,6 @@ Before you begin, ensure you have the following:
 4. Select the virtual environment by clicking on the Python version in the bottom left corner of the VS Code window
 
 ### TO run in ec2 even closed
+
 pip install gunicorn
 gunicorn -b 0.0.0.0:5000 app:app

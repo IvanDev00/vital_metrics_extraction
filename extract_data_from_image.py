@@ -1,8 +1,6 @@
-import cv2
 import easyocr
-from preprocess_image import preprocess_image
-from regions import dashboard_regions,watch_regions, bmi_regions, ring_regions
-from structured_data import dashboard_data, bmi_data, format_watch_region_label, ring_data, watch_data
+from regions import watch_regions, bmi_regions, ring_regions
+from structured_data import  bmi_data, ring_data, watch_data
 from is_vertically_aligned import is_vertically_aligned
 from correct_ocr_results import correct_ocr_results
 
