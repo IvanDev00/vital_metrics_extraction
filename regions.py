@@ -80,4 +80,12 @@ ring_regions = [
   {"x": 1407, "y": 274, "width": 78, "height": 47, "unit": 'px' },
   {"x": 1407, "y": 332, "width": 78, "height": 47, "unit": 'px'},
   {"x": 1504, "y": 397, "width": 78, "height": 47, "unit": 'px'},
+  {"x": 210,"y": 463,"width": 62,"height": 40,"unit": "px"},
+  {
+    "x": 210,
+    "y": 508,
+    "width": 62,
+    "height": 40,
+    "unit": "px"
+}
 ]

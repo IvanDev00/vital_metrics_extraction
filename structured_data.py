@@ -222,6 +222,8 @@ def ring_data(result):
         "oxygen_level": result[0],
         "pulse_rate": result[1],
         "o2_score": result[2],
+        "4_percent_drop": result[3],
+        "3_percent_drop": result[4],
     }
 
 
