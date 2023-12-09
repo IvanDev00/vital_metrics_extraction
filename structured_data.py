@@ -51,23 +51,17 @@ def watch_data(raw_data):
     for i in range(2, len(data)):
         if data[i] in diagnosis_keys:
             index = diagnosis_keys.index(data[i])
-            try:
-                diagnosis_value = data[i+2] or ""
-                sleep_value = data[i+1] or ""
-                diagnosis = {
-                    "diagnosis": data[i] or "",
-                    "diagnosis_label": data[i+1] or "",
-                    "diagnosis_keyValue": key_values[index] or "",
-                }
-            except IndexError:
-                diagnosis_value =  ""
-                sleep_value =  ""
-                diagnosis = {
-                    "diagnosis": "",
-                    "diagnosis_label":  "",
-                    "diagnosis_keyValue":  "",
-                }
-
+            if i + 2 < len(data):
+                diagnosis_value = data[i + 2] or ""
+            else:
+                diagnosis_value = ""
+            sleep_value = data[i+1] or ""
+            diagnosis = {
+                "diagnosis": data[i] or "",
+                "diagnosis_label": data[i+1] or "",
+                "diagnosis_keyValue": key_values[index] or "",
+            }
+    
             if diagnosis["diagnosis"] == 'Sleep':
                diagnosis["diagnosis_label"] = get_sleep_hours(data[i+1]) or "0 hour 0 minute"
                diagnosis["diagnosis_value"]= sleep_value or ""
@@ -79,7 +73,7 @@ def watch_data(raw_data):
                     diagnosis["diagnosis_numeric_value"] = ""
                     diagnosis["diagnosis_value"]= ""
                 else:
-                    diagnosis["diagnosis_numeric_value"] = get_numeric_value(diagnosis_value, key_pattern) or 0
+                    diagnosis["diagnosis_numeric_value"] = get_numeric_value(diagnosis_value, key_pattern)
                     diagnosis["diagnosis_value"]= diagnosis_value
 
             medical_report.append(diagnosis)
