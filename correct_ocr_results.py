@@ -10,10 +10,16 @@ def correct_ocr_results(text):
         text = re.sub(r'4O', '40', text)  # Correct common OCR mistake for 40
         text = re.sub(r'O', '0', text)    # Correct common OCR mistake for 0
 
+        # Additional correction for time format with dots
+        text = re.sub(r'(\d+)\.(\d+)([ap]m)', r'\1:\2\3', text)
+
+        text = re.sub(r'(\d+\.\d{1,2})1b', r'\1lb', text)
+
     text = re.sub(r'(\d+\.\d{1,2})1b', r'\1lb', text)
 
     # Correct Celsius symbol
     text = re.sub(r'(\d+)8C', r'\1°C', text)
+    text = re.sub(r'(\d+)9C', r'\1°C', text)
 
     # Correct mg/dL format
     text = re.sub(r'mgldL', 'mg/dL', text)

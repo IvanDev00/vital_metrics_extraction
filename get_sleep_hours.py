@@ -1,4 +1,7 @@
 def get_sleep_hours(input_str):
+    if input_str == "":
+        return f"0 hour 0 minute"
+
     start_time, end_time = input_str.split("-")
 
     def convert_to_24_hour(time):
