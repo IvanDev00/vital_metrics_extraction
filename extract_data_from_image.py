@@ -4,7 +4,6 @@ from regions import watch_regions, bmi_regions, ring_regions
 from structured_data import  bmi_data, ring_data, watch_data
 from is_vertically_aligned import is_vertically_aligned
 from correct_ocr_results import correct_ocr_results
-import cv2
 
 # Initialize the reader once
 reader = easyocr.Reader(['en'], gpu=True)
@@ -28,10 +27,10 @@ def extract_data_from_image(image, region_choice):
         x, y, w, h = region["x"], region["y"], region["width"], region["height"]
         cropped_image = image[y:y+h, x:x+w]
 
-        upscaled_image = upscale_image(cropped_image)
+        # upscaled_image = upscale_image(cropped_image)
 
         try:
-            extracted = reader.readtext(upscaled_image)
+            extracted = reader.readtext(cropped_image)
             # print(f"Extracted text: {extracted}")
         except Exception as e:
             print(f"Error during OCR processing: {e}")
@@ -41,7 +40,7 @@ def extract_data_from_image(image, region_choice):
         elif(region_choice == "bmi"):
             if not extracted:
                 texts.append("")
-                print(f"Processing extracted text for region: {region}")
+                # print(f"Processing extracted text for region: {region}")
             # Sort extracted text by their vertical position
             else:
                 extracted = sorted(extracted, key=lambda entry: entry[0][0][1])
