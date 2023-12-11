@@ -1,4 +1,4 @@
-from get_sleep_hours import convert_hours_to_minutes, convert_time_to_words, get_sleep_hours
+from get_sleep_hours import convert_hours_to_minutes, convert_time_to_words
 import re
 
 def get_numeric_value(value, pattern):

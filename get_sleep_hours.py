@@ -29,3 +29,21 @@ def get_sleep_hours(input_str):
         hours_diff += 24
 
     return f"{hours_diff} hours {minutes_diff} minutes"
+
+def convert_hours_to_minutes(time):
+    total_minutes  = float(time) * 60
+
+    return int(total_minutes)
+
+def convert_time_to_words(time):
+     # Convert hours to minutes
+    total_minutes = convert_hours_to_minutes(time)
+
+    # Calculate whole hours and remaining minutes
+    whole_hours = total_minutes // 60
+    remaining_minutes = total_minutes % 60
+
+    # Build the formatted string
+    result_string = f"{whole_hours} hour(s) and {remaining_minutes} minute(s)"
+
+    return result_string
