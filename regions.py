@@ -76,16 +76,53 @@ bmi_regions = [
   { "x": 731, "y": 4534, "width": 478, "height": 239, "unit": "px" },
 ]
 
+# ring_regions = [
+#   {"x": 1407, "y": 274, "width": 78, "height": 47, "unit": 'px' },
+#   {"x": 1407, "y": 332, "width": 78, "height": 47, "unit": 'px'},
+#   {"x": 1504, "y": 397, "width": 78, "height": 47, "unit": 'px'},
+#   {"x": 210,"y": 463,"width": 62,"height": 40,"unit": "px"},
+#   {
+#     "x": 210,
+#     "y": 508,
+#     "width": 62,
+#     "height": 40,
+#     "unit": "px"
+# }
+# ]
 ring_regions = [
-  {"x": 1407, "y": 274, "width": 78, "height": 47, "unit": 'px' },
-  {"x": 1407, "y": 332, "width": 78, "height": 47, "unit": 'px'},
-  {"x": 1504, "y": 397, "width": 78, "height": 47, "unit": 'px'},
-  {"x": 210,"y": 463,"width": 62,"height": 40,"unit": "px"},
   {
-    "x": 210,
-    "y": 508,
-    "width": 62,
-    "height": 40,
-    "unit": "px"
-}
+    "x": 2934,
+    "y": 563,
+    "width": 232,
+    "height": 108,
+    "unit": "px",
+  },
+  {
+    "x": 2936,
+    "y": 683,
+    "width": 232,
+    "height": 108,
+    "unit": "px",
+  },
+  {  
+    "x": 3148,
+    "y": 815,
+    "width": 232,
+    "height": 108,
+    "unit": "px",
+  },
+  {    
+    "x": 96,
+    "y": 951,
+    "width": 440,
+    "height": 108,
+    "unit": "px",
+  },
+  {
+    "x": 98,
+    "y": 1047,
+    "width": 440,
+    "height": 108,
+    "unit": "px",
+  }
 ]

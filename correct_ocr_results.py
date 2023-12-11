@@ -30,4 +30,11 @@ def correct_ocr_results(text):
     # Correct L/min/m? format with a preceding number
     text = re.sub(r'(\d+(\.\d+)?)Lmin/m\?', r'\1L/min/m²', text)
 
+    # Retain only numeric values on the right side of ">X%:"
+    text = re.sub(r'Drops >(\d+)%[: ]*(\d+)', r'\2', text)
+    text = re.sub(r'Drops >(\d+)%[; ]*(\d+)', r'\2', text)
+
+    # Remove prefix "Drops over 3%." and retain text after the dot
+    text = re.sub(r'Drops over \d+\%.(\d+)', r'\1', text)
+
     return text

@@ -1,4 +1,4 @@
-from get_sleep_hours import get_sleep_hours
+from get_sleep_hours import convert_hours_to_minutes, convert_time_to_words, get_sleep_hours
 import re
 
 def get_numeric_value(value, pattern):
@@ -63,9 +63,13 @@ def watch_data(raw_data):
             }
     
             if diagnosis["diagnosis"] == 'Sleep':
-               diagnosis["diagnosis_label"] = get_sleep_hours(data[i+1]) or "0 hour 0 minute"
-               diagnosis["diagnosis_value"]= sleep_value or ""
-               diagnosis["diagnosis_numeric_value"] = str(get_sleep_minutes(sleep_value)) or 0
+               diagnosis["diagnosis_label"] = convert_time_to_words(total_dailySleep) or "0 hour 0 minute"
+               diagnosis["diagnosis_value"]= total_dailySleep or "0"
+               diagnosis["diagnosis_numeric_value"] = str(convert_hours_to_minutes(total_dailySleep)) or 0
+            elif diagnosis["diagnosis"] == 'Pedometer':
+                diagnosis["diagnosis_label"] = "Total Steps"
+                diagnosis["diagnosis_value"]= total_dailySteps or 0
+                diagnosis["diagnosis_numeric_value"] = total_dailySteps or 0
             else:
                 key_pattern = key_values[index]
 
