@@ -33,8 +33,12 @@ def correct_ocr_results(text):
     # Retain only numeric values on the right side of ">X%:"
     text = re.sub(r'Drops >(\d+)%[: ]*(\d+)', r'\2', text)
     text = re.sub(r'Drops >(\d+)%[; ]*(\d+)', r'\2', text)
+    text = re.sub(r'Drops >(\d+)%[: ]*>\s*(\d+)', r'\2', text)
 
     # Remove prefix "Drops over 3%." and retain text after the dot
     text = re.sub(r'Drops over \d+\%.(\d+)', r'\1', text)
+
+    # Correct decimal numbers with commas
+    text = re.sub(r'(\d+),(\d+)', r'\1.\2', text)
 
     return text

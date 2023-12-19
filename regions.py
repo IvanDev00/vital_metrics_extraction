@@ -119,10 +119,6 @@ ring_regions = [
     "unit": "px",
   },
   {
-    "x": 98,
-    "y": 1047,
-    "width": 440,
-    "height": 108,
-    "unit": "px",
+    "x": 98, "y": 1047, "width": 468, "height": 108, "unit": 'px'
   }
 ]
