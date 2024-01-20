@@ -1,6 +1,6 @@
 import easyocr
 from preprocess_image import upscale_image
-from regions import watch_regions, bmi_regions, ring_regions
+from regions import watch_regions, bmi_regions, ring_regions, broken_ring_regions
 from structured_data import  bmi_data, ring_data, watch_data
 from is_vertically_aligned import is_vertically_aligned
 from correct_ocr_results import correct_ocr_results
@@ -9,7 +9,8 @@ import cv2
 # Initialize the reader once
 reader = easyocr.Reader(['en'], gpu=True)
 
-def extract_data_from_image(image, region_choice):
+def extract_data_from_image(image, region_choice, broken_file_type=""):
+    print("broken_file_type: ",broken_file_type)
     # image = cv2.imread(images)
     # print(f"Processing for region_choice: {region_choice}")
 
@@ -18,12 +19,12 @@ def extract_data_from_image(image, region_choice):
     elif region_choice == "bmi":
         regions = bmi_regions
     elif region_choice == "ring":
-        regions = ring_regions
+        regions = broken_ring_regions if broken_file_type == "o2Ring" else ring_regions
     else:
         raise ValueError("Invalid record choice. Please choose either 'dashboard' for Dashboard Summary Record or 'bmi' for BMI Record.")
 
     texts = []
-    for region in regions:
+    for i, region in enumerate(regions):
         # print(f"Processing region: {region}")
         x, y, w, h = region["x"], region["y"], region["width"], region["height"]
         cropped_image = image[y:y+h, x:x+w]
@@ -75,6 +76,9 @@ def extract_data_from_image(image, region_choice):
             for item in data:
                 texts.append(correct_ocr_results(item))
 
+        # Save the cropped image
+        # cv2.imwrite(f"o2/cropped_image_{i}.png", cropped_image)
+
     print(f"Extracted texts: {texts}")
     if region_choice == "dashboard":
         structured_data = watch_data(texts)
@@ -91,3 +95,4 @@ def extract_data_from_image(image, region_choice):
 # extract_data_from_image("dataset/1.jpg", "dashboard")
 # extract_data_from_image("dataset/bmi.png", "bmi")
 # extract_data_from_image("22880.jpg", "dashboard")
+# extract_data_from_image("images/output_image3.png", "ring")

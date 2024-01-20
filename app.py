@@ -19,11 +19,12 @@ def extract():
             return jsonify({'error': 'No file provided'}), 400
 
         uploaded_file = request.files['record_file']
-
+        # print(uploaded_file)
         if uploaded_file.filename == '':
             return jsonify({'error': 'No selected file'}), 400
 
         region_choice = request.form.get('region_choice')
+        broken_file_type = request.form.get('broken_file_type')
         file_type = request.form.get('file_type')
 
         if file_type == 'pdf':
@@ -33,7 +34,7 @@ def extract():
         else:
             image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
 
-        raw_data, structured_data = extract_data_from_image(image, region_choice)
+        raw_data, structured_data = extract_data_from_image(image, region_choice, broken_file_type)
 
         return jsonify({
             'raw_data': raw_data,
@@ -43,3 +44,6 @@ def extract():
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return jsonify({'error': 'An error occurred'}), 400
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

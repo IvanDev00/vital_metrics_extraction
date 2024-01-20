@@ -122,3 +122,20 @@ ring_regions = [
     "x": 98, "y": 1047, "width": 468, "height": 108, "unit": 'px'
   }
 ]
+
+broken_ring_regions = [
+  {"x": 2680, "y": 537, "width": 232, "height": 108, "unit": 'px'},
+  {"x": 2688, "y": 669, "width": 232, "height": 108, "unit": 'px'},
+  {"x": 2892, "y": 815, "width": 232, "height": 108, "unit": 'px'},
+  {    
+    "x": 96,
+    "y": 951,
+    "width": 440,
+    "height": 108,
+    "unit": "px",
+  },
+  {
+    "x": 98, "y": 1047, "width": 468, "height": 108, "unit": 'px'
+  }
+]
+
